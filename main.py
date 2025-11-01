@@ -13,7 +13,7 @@ def main():
         wind_accel_x=acceleration.linear(Float(2.0)),
         wind_accel_y=acceleration.linear(Float(2.0)),
         wind_accel_z=acceleration.linear(Float(2.0)),
-        brake_mag=Float(3.0),
+        drone_speed=Float(3.0),
         dt=dt,
         steps=steps,
         t0=t0,

@@ -21,15 +21,21 @@ def solve(c: Config) -> Tuple[Tuple[Array, Array, Array], Tuple[Array, Array, Ar
     bxs = np.zeros(shape=c.steps, dtype=Float)
     bys = np.zeros(shape=c.steps, dtype=Float)
     bzs = np.zeros(shape=c.steps, dtype=Float)
+    bxs[0], bys[0], bzs[0] = _get_drone_velocity_components(
+        xs[0],
+        ys[0],
+        zs[0],
+        c
+    )
 
     t = c.t0
 
     for i in range(1, c.steps):
         xs[i], ys[i], zs[i] = _rk4(t, xs[i - 1], ys[i - 1], zs[i - 1], c)
-        bxs[i], bys[i], bzs[i] = _get_brake_mag_components(
-            xs[i - 1],
-            ys[i - 1],
-            zs[i - 1],
+        bxs[i], bys[i], bzs[i] = _get_drone_velocity_components(
+            xs[i],
+            ys[i],
+            zs[i],
             c
         )
 
@@ -41,19 +47,19 @@ def solve(c: Config) -> Tuple[Tuple[Array, Array, Array], Tuple[Array, Array, Ar
     return (xs, ys, zs), (bxs, bys, bzs)
 
 
-def _get_brake_mag_components(x: Float, y: Float, z: Float, c: Config) -> Tuple[Float, Float, Float]:
+def _get_drone_velocity_components(x: Float, y: Float, z: Float, c: Config) -> Tuple[Float, Float, Float]:
     r = np.sqrt(x * x + y * y + z * z)
     inv = 1.0 / r if r > 0.0 else 0.0
 
-    bx = c.brake_mag * x * inv
-    by = c.brake_mag * y * inv
-    bz = c.brake_mag * z * inv
+    bx = c.drone_speed * x * inv
+    by = c.drone_speed * y * inv
+    bz = c.drone_speed * z * inv
 
     return bx, by, bz
 
 
 def _derivatives(t: Float, x: Float, y: Float, z: Float, c: Config) -> Tuple[Float, Float, Float]:
-    bx, by, bz = _get_brake_mag_components(x, y, z, c)
+    bx, by, bz = _get_drone_velocity_components(x, y, z, c)
 
     dx = c.wind_accel_x(t) - bx
     dy = c.wind_accel_y(t) - by

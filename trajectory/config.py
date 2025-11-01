@@ -7,7 +7,7 @@ class Config:
     wind_accel_x: Function
     wind_accel_y: Function
     wind_accel_z: Function
-    brake_mag: Float
+    drone_speed: Float
     dt: Float
     steps: int
     x0: Float
