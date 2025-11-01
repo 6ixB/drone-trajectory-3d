@@ -1,7 +1,6 @@
 from __future__ import annotations
 import numpy as np
 from scipy.interpolate import CubicSpline
-from scipy.interpolate import CubicSpline
 from .types import Float, Array, Function
 
 
