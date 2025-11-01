@@ -1,8 +1,8 @@
 from __future__ import annotations
 from typing import Any
-from .types import Float, Array
 import numpy as np
 from netCDF4 import Variable
+from .types import Float, Array
 
 
 def pick_slice(var: Variable[Any], t0: int, t1: int, sidx: int) -> Array:

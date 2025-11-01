@@ -1,6 +1,6 @@
 from enum import Enum
-from services.data_pipeline.types import Float, Function
 import numpy as np
+from services.data_pipeline.types import Float, Function
 
 
 class TrigFuncType(Enum):

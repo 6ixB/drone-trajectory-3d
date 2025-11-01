@@ -1,9 +1,9 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from typing import Final, Any
-from .types import Float, Array
 import numpy as np
 from netCDF4 import Dataset, Variable
+from .types import Float, Array
 from .ncdf_ops import pick_slice, norm_fill
 
 

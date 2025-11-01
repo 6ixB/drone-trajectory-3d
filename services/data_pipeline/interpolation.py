@@ -1,8 +1,8 @@
 from __future__ import annotations
-from .types import Float, Array, Function
 import numpy as np
 from scipy.interpolate import CubicSpline
 from scipy.interpolate import CubicSpline
+from .types import Float, Array, Function
 
 
 def _to_f64(a: Array) -> Array:
